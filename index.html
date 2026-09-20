@@ -1,25 +1,154 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#18243A"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="잇잇 갓생"><link rel="manifest" href="manifest.webmanifest"><title>잇잇 갓생</title><style>
-:root{--n:#18243a;--b:#f6f7fb;--c:#fff;--t:#202636;--m:#7b8495;--l:#e7eaf0;--a:#6875d8}*{box-sizing:border-box}body{margin:0;background:var(--b);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}.app{max-width:600px;margin:auto;min-height:100vh;padding-bottom:88px}.top{background:var(--n);color:white;padding:calc(env(safe-area-inset-top) + 18px) 20px 20px;border-radius:0 0 22px 22px}.top small{opacity:.7}.top h1{margin:6px 0;font-size:25px}.top div{opacity:.8;font-size:13px}.content{padding:16px}.view{display:none}.view.active{display:block}.card,.stat{background:var(--c);border:1px solid var(--l);border-radius:18px;padding:16px;margin-bottom:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat b{display:block;font-size:22px;margin-top:4px}.label,.mini{font-size:12px;color:var(--m)}.progress{height:8px;background:#eceef4;border-radius:8px;overflow:hidden;margin-top:12px}.bar{height:100%;background:var(--a)}h2{font-size:18px;margin:2px 0 12px}.row,.task{display:flex;align-items:center;gap:9px}.task{padding:11px 0;border-bottom:1px solid var(--l)}.task:last-child{border:0}.task input{width:19px;height:19px;accent-color:var(--a)}.task.done span{text-decoration:line-through;color:#9aa1af}.time{width:55px;color:var(--m);font-size:12px}.pill{font-size:11px;background:#eef0ff;color:#5661ba;padding:4px 7px;border-radius:20px}.btn{border:0;background:var(--n);color:#fff;border-radius:11px;padding:9px 12px;font-weight:600}.secondary{background:#eef0f5;color:#3c4454}.danger{background:#fff0f0;color:#b34c4c}.input,.select{width:100%;padding:11px;border:1px solid var(--l);border-radius:11px;background:#fff;font:inherit}.form{display:grid;grid-template-columns:1fr 1fr;gap:8px}.full{grid-column:1/-1}.section{display:flex;justify-content:space-between;align-items:center;margin:4px 2px 10px}.empty{text-align:center;color:var(--m);padding:14px}.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(600px,100%);background:rgba(255,255,255,.96);backdrop-filter:blur(15px);border-top:1px solid var(--l);display:grid;grid-template-columns:repeat(6,1fr);padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:5}.nav{border:0;background:none;color:#8991a0;font-size:10px;padding:3px}.nav.on{color:var(--n);font-weight:700}.nav i{display:block;font-style:normal;font-size:20px;margin-bottom:2px}.item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--l)}.item:last-child{border:0}
-</style></head><body><div class="app"><header class="top"><small>PERSONAL PRODUCTIVITY</small><h1>To-do</h1><div id="date"></div></header><main class="content"><section id="today" class="view active"></section><section id="schedule" class="view"></section><section id="study" class="view"></section><section id="weekly" class="view"></section><section id="habits" class="view"></section><section id="blog" class="view"></section></main><nav class="bottom"><button class="nav on" data-v="today"><i>🏠</i>오늘</button><button class="nav" data-v="schedule"><i>📅</i>일정</button><button class="nav" data-v="study"><i>📚</i>공부</button><button class="nav" data-v="weekly"><i>📊</i>주간</button><button class="nav" data-v="habits"><i>🌱</i>습관</button><button class="nav" data-v="blog"><i>✍️</i>블로그</button></nav></div>
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#18243A"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="To-do">
+<link rel="manifest" href="manifest.webmanifest"><title>To-do</title>
+<style>
+:root{--n:#18243a;--b:#f6f7fb;--c:#fff;--t:#202636;--m:#7b8495;--l:#e7eaf0;--a:#6875d8}
+*{box-sizing:border-box}body{margin:0;background:var(--b);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+.app{max-width:600px;margin:auto;min-height:100vh;padding-bottom:88px}.top{background:var(--n);color:white;padding:calc(env(safe-area-inset-top) + 18px) 20px 20px;border-radius:0 0 22px 22px}
+.top small{opacity:.7}.top h1{margin:6px 0;font-size:25px}.top div{opacity:.8;font-size:13px}.content{padding:16px}.view{display:none}.view.active{display:block}
+.card,.stat{background:var(--c);border:1px solid var(--l);border-radius:18px;padding:16px;margin-bottom:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat b{display:block;font-size:22px;margin-top:4px}.label,.mini{font-size:12px;color:var(--m)}.progress{height:8px;background:#eceef4;border-radius:8px;overflow:hidden;margin-top:12px}.bar{height:100%;background:var(--a)}
+h2{font-size:18px;margin:2px 0 12px}.row,.task{display:flex;align-items:center;gap:9px}.task{padding:11px 0;border-bottom:1px solid var(--l)}.task:last-child{border:0}
+.task input{width:19px;height:19px;accent-color:var(--a)}.task.done span{text-decoration:line-through;color:#9aa1af}.time{width:55px;color:var(--m);font-size:12px}
+.pill{font-size:11px;background:#eef0ff;color:#5661ba;padding:4px 7px;border-radius:20px}.btn{border:0;background:var(--n);color:#fff;border-radius:11px;padding:9px 12px;font-weight:600}
+.secondary{background:#eef0f5;color:#3c4454}.danger{background:#fff0f0;color:#b34c4c}.input,.select{width:100%;padding:11px;border:1px solid var(--l);border-radius:11px;background:#fff;font:inherit}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:8px}.full{grid-column:1/-1}.section{display:flex;justify-content:space-between;align-items:center;margin:4px 2px 10px}
+.empty{text-align:center;color:var(--m);padding:14px}.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(600px,100%);background:rgba(255,255,255,.96);backdrop-filter:blur(15px);border-top:1px solid var(--l);display:grid;grid-template-columns:repeat(6,1fr);padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:5}
+.nav{border:0;background:none;color:#8991a0;font-size:10px;padding:3px}.nav.on{color:var(--n);font-weight:700}.nav i{display:block;font-style:normal;font-size:20px;margin-bottom:2px}.item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--l)}.item:last-child{border:0}
+.datebar{display:flex;align-items:center;gap:8px}.datebar .input{flex:1}.month-nav{display:flex;align-items:center;justify-content:space-between;gap:8px}.month-nav h2{margin:0}.small-select{font-size:12px;padding:7px 8px}.status-select{width:auto;min-width:90px;padding:7px 8px;font-size:12px}
+@media(max-width:420px){.task .pill{font-size:10px}.habits-grid{font-size:8px!important}.habit-label{width:72px!important;font-size:12px!important}.daybox{min-width:20px!important}}
+</style>
+</head>
+<body><div class="app">
+<header class="top"><small>PERSONAL PRODUCTIVITY</small><h1>To-do</h1><div id="date"></div></header>
+<main class="content"><section id="today" class="view active"></section><section id="schedule" class="view"></section><section id="study" class="view"></section><section id="weekly" class="view"></section><section id="habits" class="view"></section><section id="blog" class="view"></section></main>
+<nav class="bottom"><button class="nav on" data-v="today"><i>🏠</i>오늘</button><button class="nav" data-v="schedule"><i>📅</i>일정</button><button class="nav" data-v="study"><i>📚</i>공부</button><button class="nav" data-v="weekly"><i>📊</i>주간</button><button class="nav" data-v="habits"><i>🌱</i>습관</button><button class="nav" data-v="blog"><i>✍️</i>블로그</button></nav>
+</div>
 <script>
-const K="To-do-v1";let S=JSON.parse(localStorage.getItem(K)||"null")||{tasks:{},schedules:[],studies:[],habits:{},blogs:[],exam:"",note:""};
-const save=()=>{localStorage.setItem(K,JSON.stringify(S));render()};const iso=d=>new Date(d).toISOString().slice(0,10);const td=()=>iso(new Date());const esc=s=>String(s??"").replace(/[&<>"']/g,x=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[x]));
-document.getElementById("date").textContent=new Date().toLocaleDateString("ko-KR",{year:"numeric",month:"long",day:"numeric",weekday:"short"});
-const defaults=[["06:30","출근 준비 · 이동","생활"],["08:00","경제 콘텐츠","습관"],["09:00","업무","회사"],["18:00","퇴근 · 이동","생활"],["21:30","오늘의 핵심 공부","공부"],["22:30","외국어 30분","습관"],["23:00","독서 30분","독서"]];
-function tasks(){return S.tasks[td()]||(S.tasks[td()]=defaults.map((x,i)=>({id:i,time:x[0],text:x[1],cat:x[2],done:false})))}
-function studyMin(){return S.studies.filter(x=>x.date===td()).reduce((a,x)=>a+ +x.min,0)}
-function today(){let t=tasks(),n=t.filter(x=>x.done).length,p=Math.round(n/t.length*100);document.getElementById("today").innerHTML=`<div class="card"><div class="row"><div><div class="label">오늘의 달성률</div><b style="font-size:28px">${p}%</b></div><div class="stat"><div class="label">오늘 공부</div><b>${studyMin()}분</b></div></div><div class="progress"><div class="bar" style="width:${p}%"></div></div></div><div class="section"><h2>오늘 할 일</h2><span class="mini">${n}/${t.length}</span></div><div class="card">${t.map(x=>`<label class="task ${x.done?"done":""}"><input type="checkbox" ${x.done?"checked":""} onchange="task(${x.id})"><span class="time">${x.time}</span><span style="flex:1">${esc(x.text)}</span><span class="pill">${esc(x.cat)}</span></label>`).join("")}</div><div class="card"><div class="section"><h2>오늘 메모</h2><button class="btn secondary" onclick="note()">저장</button></div><textarea id="note" class="input" rows="3" placeholder="오늘 기억해둘 것">${esc(S.note)}</textarea></div>`}
-function task(i){tasks()[i].done=!tasks()[i].done;save()}function note(){S.note=document.getElementById("note").value;save()}
-function schedule(){document.getElementById("schedule").innerHTML=`<div class="section"><h2>일정</h2><button class="btn" onclick="addSch()">+ 일정</button></div><div class="card"><div class="form"><input id="sd" class="input" type="date" value="${td()}"><input id="st" class="input" type="time" value="19:00"><input id="sn" class="input full" placeholder="일정 이름"><select id="sc" class="select full"><option>개인</option><option>운동</option><option>약속</option><option>공부</option><option>기타</option></select></div></div><div class="card">${S.schedules.filter(x=>x.date>=td()).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).map((x,i)=>`<div class="item"><span class="time">${x.date.slice(5)}<br>${x.time}</span><span style="flex:1"><b>${esc(x.name)}</b><br><span class="mini">${esc(x.cat)}</span></span><button class="btn danger" onclick="delSch(${i})">삭제</button></div>`).join("")||'<div class="empty">등록된 일정이 없어요.</div>'}</div><div class="card"><b>🔔 알림 테스트</b><p class="mini">홈 화면 설치 후 알림 권한을 허용하면 지원 환경에서 테스트할 수 있어요.</p><button class="btn secondary" onclick="testNotify()">알림 테스트</button></div>`}
-function addSch(){let d=sd.value,t=st.value,n=sn.value.trim(),c=sc.value;if(!n)return alert("일정 이름을 입력해줘.");S.schedules.push({date:d,time:t,name:n,cat:c});save()}function delSch(i){S.schedules.splice(i,1);save()}
-async function testNotify(){if(!("Notification"in window))return alert("이 환경은 알림을 지원하지 않아요.");let p=await Notification.requestPermission();if(p==="granted")new Notification("잇잇 갓생",{body:"알림 테스트가 도착했어요 ✨"});}
-function study(){let w=S.studies.filter(x=>x.date>=weekStart()).reduce((a,x)=>a+ +x.min,0),dd=S.exam?Math.ceil((new Date(S.exam)-new Date())/86400000):null;document.getElementById("study").innerHTML=`<div class="grid"><div class="stat"><div class="label">이번 주 공부</div><b>${w}분</b></div><div class="stat"><div class="label">시험 D-day</div><b>${dd===null?"미설정":dd<0?"종료":"D-"+dd}</b></div></div><div class="card"><h2>시험일</h2><div class="row"><input id="exam" class="input" type="date" value="${S.exam}"><button class="btn" onclick="setExam()">저장</button></div></div><div class="card"><h2>공부 기록</h2><div class="form"><input id="sdate" class="input" type="date" value="${td()}"><input id="smin" class="input" type="number" min="0" placeholder="공부시간(분)"><input id="ssub" class="input full" placeholder="과목"><input id="stype" class="input full" placeholder="학습 내용 / 복습 메모"><button class="btn full" onclick="addStudy()">기록하기</button></div></div><div class="card">${S.studies.slice().reverse().map((x,i)=>`<div class="item"><span class="time">${x.date}</span><span style="flex:1"><b>${esc(x.sub)}</b> · ${x.min}분<br><span class="mini">${esc(x.type||"")}</span></span><button class="btn danger" onclick="delStudy(${S.studies.length-1-i})">삭제</button></div>`).join("")||'<div class="empty">아직 공부 기록이 없어요.</div>'}</div>`}
-function weekStart(){let d=new Date(),n=(d.getDay()+6)%7;d.setDate(d.getDate()-n);return iso(d)}function setExam(){S.exam=exam.value;save()}function addStudy(){if(!ssub.value||!smin.value)return alert("과목과 공부시간을 입력해줘.");S.studies.push({date:sdate.value,min:smin.value,sub:ssub.value,type:stype.value});save()}function delStudy(i){S.studies.splice(i,1);save()}
-const H=["외국어","경제 콘텐츠","독서","운동","공부","블로그","휴식"];function hk(d,h){return d+"_"+h}
-function habits(){let now=new Date(),n=new Date(now.getFullYear(),now.getMonth()+1,0).getDate(),days=Array.from({length:n},(_,i)=>iso(new Date(now.getFullYear(),now.getMonth(),i+1)));document.getElementById("habits").innerHTML=`<div class="section"><h2>습관 트래커</h2><span class="mini">${now.getFullYear()}.${now.getMonth()+1}</span></div><div class="card">${H.map(h=>`<div class="item"><b style="width:80px">${h}</b><div style="display:flex;gap:3px;overflow:auto">${days.map(d=>`<label style="font-size:9px;text-align:center"><span>${+d.slice(-2)}</span><br><input type="checkbox" ${S.habits[hk(d,h)]?"checked":""} onchange="hab('${d}','${h}')"></label>`).join("")}</div></div>`).join("")}</div>`}
-function hab(d,h){S.habits[hk(d,h)]=!S.habits[hk(d,h)];save()}
-function weekly(){let st=new Date(weekStart()+"T00:00:00"),ds=Array.from({length:7},(_,i)=>{let d=new Date(st);d.setDate(d.getDate()+i);return iso(d)}),w=S.studies.filter(x=>ds.includes(x.date)).reduce((a,x)=>a+ +x.min,0);let cnt=h=>ds.filter(d=>S.habits[hk(d,h)]).length;document.getElementById("weekly").innerHTML=`<div class="section"><h2>주간 대시보드</h2><span class="mini">${ds[0]} ~ ${ds[6]}</span></div><div class="grid"><div class="stat"><div class="label">공부</div><b>${w}분</b></div><div class="stat"><div class="label">운동</div><b>${cnt("운동")}회</b></div><div class="stat"><div class="label">독서</div><b>${cnt("독서")}회</b></div><div class="stat"><div class="label">외국어</div><b>${cnt("외국어")}회</b></div></div><div class="card"><h2>주간 체크</h2>${[["공부",10],["운동","2~3"],["독서",7],["외국어",7],["블로그","필요 시"],["휴식","1+"]].map(x=>`<div class="item"><b style="width:80px">${x[0]}</b><span style="flex:1">목표 ${x[1]}</span><b>${x[0]==="공부"?(w/60).toFixed(1)+"시간":cnt(x[0])+"회"}</b></div>`).join("")}</div>`}
-function blog(){document.getElementById("blog").innerHTML=`<div class="section"><h2>블로그 관리</h2><button class="btn" onclick="addBlog()">+ 글</button></div><div class="card"><div class="form"><input id="bn" class="input full" placeholder="글 아이디어 / 제목"><input id="bk" class="input" placeholder="키워드"><select id="bc" class="select"><option>맛집</option><option>카페</option><option>공연·전시</option><option>예매·티켓팅</option><option>일상</option><option>기타</option></select><select id="bs" class="select full"><option>아이디어</option><option>사진 준비</option><option>작성 중</option><option>수정 중</option><option>발행 완료</option></select><input id="bp" class="input full" type="date" value="${td()}"></div></div><div class="card">${S.blogs.slice().reverse().map((x,i)=>`<div class="item"><span class="pill">${esc(x.status)}</span><span style="flex:1"><b>${esc(x.name)}</b><br><span class="mini">${esc(x.cat)} · ${esc(x.keyword||"")}</span></span><button class="btn danger" onclick="delBlog(${S.blogs.length-1-i})">삭제</button></div>`).join("")||'<div class="empty">관리할 글을 추가해보세요.</div>'}</div>`}
-function addBlog(){if(!bn.value.trim())return alert("아이디어나 제목을 입력해줘.");S.blogs.push({name:bn.value,keyword:bk.value,cat:bc.value,status:bs.value,pub:bp.value});save()}function delBlog(i){S.blogs.splice(i,1);save()}
-function render(){today();schedule();study();weekly();habits();blog()}document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav").forEach(x=>x.classList.remove("on"));b.classList.add("on");document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));document.getElementById(b.dataset.v).classList.add("active")});if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});render();
+const K="잇잇갓생-v1";
+let S=JSON.parse(localStorage.getItem(K)||"null")||{tasks:{},schedules:[],studies:[],habits:{},blogs:[],exam:"",notes:{},weeklyTargets:{study:10,exercise:3,reading:7,language:7,blog:1}};
+S.tasks=S.tasks||{};S.schedules=S.schedules||[];S.studies=S.studies||[];S.habits=S.habits||{};S.blogs=S.blogs||[];S.notes=S.notes||{};
+if(!S.weeklyTargets)S.weeklyTargets={study:10,exercise:3,reading:7,language:7,blog:1};
+const save=()=>{localStorage.setItem(K,JSON.stringify(S));render()};
+const iso=d=>{let x=new Date(d);return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")};
+const td=()=>iso(new Date());
+const esc=s=>String(s??"").replace(/[&<>"']/g,x=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[x]));
+const fmtDate=d=>new Date(d+"T00:00:00").toLocaleDateString("ko-KR",{year:"numeric",month:"long",day:"numeric",weekday:"short"});
+let selectedDate=td();
+let habitMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1);
+let weekFrom=iso(new Date(new Date().setDate(new Date().getDate()-((new Date().getDay()+6)%7))));
+let weekTo=iso(new Date(new Date(weekFrom+"T00:00:00").setDate(new Date(weekFrom+"T00:00:00").getDate()+6)));
+
+document.getElementById("date").textContent=fmtDate(td());
+
+const defaultsWeekday=[["06:30","출근 준비 · 이동","생활"],["08:00","경제 콘텐츠","경제 콘텐츠"],["09:00","업무","회사"],["18:00","퇴근 · 이동","생활"],["21:30","오늘의 핵심 공부","공부"],["22:30","외국어 30분","외국어"],["23:00","독서 30분","독서"]];
+const defaultsWeekend=[["08:00","경제 콘텐츠","경제 콘텐츠"],["10:00","오늘의 핵심 공부","공부"],["15:00","외국어 30분","외국어"],["20:00","독서 30분","독서"]];
+const habitNames=["외국어","경제 콘텐츠","독서","운동","공부","블로그"];
+const taskHabitMap={"외국어":"외국어","경제 콘텐츠":"경제 콘텐츠","독서":"독서","운동":"운동","공부":"공부","블로그":"블로그"};
+
+function isWeekend(date){let d=new Date(date+"T00:00:00").getDay();return d===0||d===6}
+function tasksFor(d){
+ if(!S.tasks[d]){
+   let arr=(isWeekend(d)?defaultsWeekend:defaultsWeekday).map((x,i)=>({id:"d"+i+"-"+d,time:x[0],text:x[1],cat:x[2],done:false,custom:false}));
+   S.tasks[d]=arr;
+ }
+ return S.tasks[d];
+}
+function studyMinFor(d){return S.studies.filter(x=>x.date===d).reduce((a,x)=>a+ +x.min,0)}
+function taskHabit(x){
+ if(x.cat==="운동"||x.text.includes("운동"))return "운동";
+ if(x.cat==="외국어"||x.text.includes("외국어"))return "외국어";
+ if(x.cat==="경제 콘텐츠"||x.text.includes("경제"))return "경제 콘텐츠";
+ if(x.cat==="독서"||x.text.includes("독서"))return "독서";
+ if(x.cat==="공부"||x.text.includes("공부"))return "공부";
+ if(x.cat==="블로그"||x.text.includes("블로그"))return "블로그";
+ return null;
+}
+function syncHabitFromTasks(d,h){
+ const related=tasksFor(d).some(x=>x.done&&taskHabit(x)===h);
+ S.habits[d+"_"+h]=related;
+}
+function today(){
+ let t=tasksFor(selectedDate),n=t.filter(x=>x.done).length,p=t.length?Math.round(n/t.length*100):0;
+ document.getElementById("today").innerHTML=`
+ <div class="card"><div class="datebar"><button class="btn secondary" onclick="moveToday(-1)">‹</button><input class="input" type="date" value="${selectedDate}" onchange="changeToday(this.value)"><button class="btn secondary" onclick="moveToday(1)">›</button></div></div>
+ <div class="card"><div class="row"><div><div class="label">${selectedDate===td()?"오늘":"선택한 날짜"}의 달성률</div><b style="font-size:28px">${p}%</b></div><div class="stat"><div class="label">공부</div><b>${studyMinFor(selectedDate)}분</b></div></div><div class="progress"><div class="bar" style="width:${p}%"></div></div></div>
+ <div class="section"><h2>${selectedDate===td()?"오늘":"선택한 날짜"} 할 일</h2><div class="row"><span class="mini">${n}/${t.length}</span><button class="btn" onclick="addTask()">+ 할 일</button></div></div>
+ <div class="card">${t.map((x,i)=>`<label class="task ${x.done?"done":""}"><input type="checkbox" ${x.done?"checked":""} onchange="task(${i})"><span class="time">${esc(x.time)}</span><span style="flex:1">${esc(x.text)}</span><span class="pill">${esc(x.cat)}</span></label>`).join("")||'<div class="empty">할 일이 없어요. + 할 일로 추가해보세요.</div>'}</div>
+ <div class="card"><div class="section"><h2>${selectedDate} 메모</h2><button class="btn secondary" onclick="note()">저장</button></div><textarea id="note" class="input" rows="3" placeholder="이날 기억해둘 것">${esc(S.notes[selectedDate]||"")}</textarea></div>`;
+}
+function changeToday(v){if(v){selectedDate=v;document.getElementById("date").textContent=fmtDate(v);render()}}
+function moveToday(n){let d=new Date(selectedDate+"T00:00:00");d.setDate(d.getDate()+n);changeToday(iso(d))}
+function addTask(){
+ let time=prompt("시간을 입력해줘 (예: 19:30)","19:30");if(time===null)return;
+ let text=prompt("할 일을 입력해줘","");if(!text?.trim())return;
+ let cat=prompt("분류를 입력해줘 (예: 공부, 운동, 외국어, 경제 콘텐츠, 독서, 블로그, 개인)","개인")||"개인";
+ let t=tasksFor(selectedDate);t.push({id:"c"+Date.now(),time,text:text.trim(),cat:cat.trim(),done:false,custom:true});save();
+}
+function task(i){
+ let t=tasksFor(selectedDate);t[i].done=!t[i].done;let h=taskHabit(t[i]);if(h)syncHabitFromTasks(selectedDate,h);save();
+}
+function note(){S.notes[selectedDate]=document.getElementById("note").value;save()}
+
+function schedule(){
+ document.getElementById("schedule").innerHTML=`<div class="section"><h2>일정</h2><button class="btn" onclick="addSch()">+ 일정</button></div>
+ <div class="card"><div class="form"><input id="sd" class="input" type="date" value="${td()}"><input id="st" class="input" type="time" value="19:00"><input id="sn" class="input full" placeholder="일정 이름"><select id="sc" class="select full"><option>개인</option><option>운동</option><option>약속</option><option>공부</option><option>기타</option></select></div></div>
+ <div class="card">${S.schedules.slice().sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).map((x,i)=>`<div class="item"><span class="time">${x.date.slice(5)}<br>${x.time}</span><span style="flex:1"><b>${esc(x.name)}</b><br><span class="mini">${esc(x.cat)}</span></span><button class="btn danger" onclick="delSch(${i})">삭제</button></div>`).join("")||'<div class="empty">등록된 일정이 없어요.</div>'}</div>`;
+}
+function addSch(){let d=sd.value,t=st.value,n=sn.value.trim(),c=sc.value;if(!n)return alert("일정 이름을 입력해줘.");S.schedules.push({date:d,time:t,name:n,cat:c});save()}
+function delSch(i){S.schedules.splice(i,1);save()}
+
+function study(){
+ let w=S.studies.filter(x=>x.date>=weekFrom&&x.date<=weekTo).reduce((a,x)=>a+ +x.min,0),dd=S.exam?Math.ceil((new Date(S.exam)-new Date())/86400000):null;
+ document.getElementById("study").innerHTML=`<div class="grid"><div class="stat"><div class="label">선택 기간 공부</div><b>${w}분</b></div><div class="stat"><div class="label">시험 D-day</div><b>${dd===null?"미설정":dd<0?"종료":"D-"+dd}</b></div></div>
+ <div class="card"><h2>시험일</h2><div class="row"><input id="exam" class="input" type="date" value="${S.exam}"><button class="btn" onclick="setExam()">저장</button></div></div>
+ <div class="card"><h2>공부 기록</h2><div class="form"><input id="sdate" class="input" type="date" value="${td()}"><input id="smin" class="input" type="number" min="0" placeholder="공부시간(분)"><input id="ssub" class="input full" placeholder="과목"><input id="stype" class="input full" placeholder="학습 내용 / 복습 메모"><button class="btn full" onclick="addStudy()">기록하기</button></div></div>
+ <div class="card">${S.studies.slice().reverse().map((x,i)=>`<div class="item"><span class="time">${x.date}</span><span style="flex:1"><b>${esc(x.sub)}</b> · ${x.min}분<br><span class="mini">${esc(x.type||"")}</span></span><button class="btn danger" onclick="delStudy(${S.studies.length-1-i})">삭제</button></div>`).join("")||'<div class="empty">아직 공부 기록이 없어요.</div>'}</div>`;
+}
+function setExam(){S.exam=exam.value;save()}
+function addStudy(){if(!ssub.value||!smin.value)return alert("과목과 공부시간을 입력해줘.");S.studies.push({date:sdate.value,min:smin.value,sub:ssub.value,type:stype.value});save()}
+function delStudy(i){S.studies.splice(i,1);save()}
+
+function habits(){
+ let y=habitMonth.getFullYear(),m=habitMonth.getMonth(),n=new Date(y,m+1,0).getDate(),days=Array.from({length:n},(_,i)=>iso(new Date(y,m,i+1)));
+ document.getElementById("habits").innerHTML=`<div class="month-nav"><button class="btn secondary" onclick="moveHabitMonth(-1)">‹</button><h2>${y}년 ${m+1}월</h2><button class="btn secondary" onclick="moveHabitMonth(1)">›</button></div>
+ <div class="card"><div class="habits-grid" style="font-size:9px">${habitNames.map(h=>`<div class="item"><b class="habit-label" style="width:82px;font-size:12px;flex:none">${h}</b><div style="display:flex;gap:2px;overflow:auto;flex:1">${days.map(d=>`<label class="daybox" style="min-width:22px;text-align:center"><span>${+d.slice(-2)}</span><br><input type="checkbox" ${S.habits[d+"_"+h]?"checked":""} onchange="hab('${d}','${h}')"></label>`).join("")}</div></div>`).join("")}</div></div>`;
+}
+function moveHabitMonth(n){habitMonth.setMonth(habitMonth.getMonth()+n);render()}
+function hab(d,h){S.habits[d+"_"+h]=!S.habits[d+"_"+h];save()}
+
+function daysBetween(a,b){let st=new Date(a+"T00:00:00"),en=new Date(b+"T00:00:00"),out=[];if(st>en)[st,en]=[en,st];for(let d=new Date(st);d<=en;d.setDate(d.getDate()+1))out.push(iso(d));return out}
+function weekly(){
+ let ds=daysBetween(weekFrom,weekTo),w=S.studies.filter(x=>ds.includes(x.date)).reduce((a,x)=>a+ +x.min,0),cnt=h=>ds.filter(d=>S.habits[d+"_"+h]).length;
+ let targets=S.weeklyTargets;
+ document.getElementById("weekly").innerHTML=`<div class="card"><h2>조회 기간</h2><div class="form"><input id="wf" class="input" type="date" value="${weekFrom}"><input id="wt" class="input" type="date" value="${weekTo}"><button class="btn full" onclick="setWeek()">조회하기</button></div></div>
+ <div class="section"><h2>주간 대시보드</h2><span class="mini">${weekFrom} ~ ${weekTo}</span></div>
+ <div class="grid"><div class="stat"><div class="label">공부</div><b>${w}분</b></div><div class="stat"><div class="label">운동</div><b>${cnt("운동")}회</b></div><div class="stat"><div class="label">독서</div><b>${cnt("독서")}회</b></div><div class="stat"><div class="label">외국어</div><b>${cnt("외국어")}회</b></div></div>
+ <div class="card"><div class="section"><h2>주간 체크</h2><button class="btn secondary" onclick="saveTargets()">저장</button></div>
+ <div class="item"><b style="width:82px">공부</b><span style="flex:1">실적 ${(w/60).toFixed(1)}시간</span><input id="tgStudy" class="input" style="width:82px" type="number" min="0" step=".5" value="${targets.study}" title="목표 시간"></div>
+ <div class="item"><b style="width:82px">운동</b><span style="flex:1">실적 ${cnt("운동")}회</span><input id="tgExercise" class="input" style="width:82px" type="number" min="0" value="${targets.exercise}"></div>
+ <div class="item"><b style="width:82px">독서</b><span style="flex:1">실적 ${cnt("독서")}회</span><input id="tgReading" class="input" style="width:82px" type="number" min="0" value="${targets.reading}"></div>
+ <div class="item"><b style="width:82px">외국어</b><span style="flex:1">실적 ${cnt("외국어")}회</span><input id="tgLanguage" class="input" style="width:82px" type="number" min="0" value="${targets.language}"></div>
+ <div class="item"><b style="width:82px">블로그</b><span style="flex:1">실적 ${cnt("블로그")}회</span><input id="tgBlog" class="input" style="width:82px" type="number" min="0" value="${targets.blog}"></div>
+ </div>`;
+}
+function setWeek(){weekFrom=wf.value;weekTo=wt.value;if(weekFrom>weekTo)[weekFrom,weekTo]=[weekTo,weekFrom];render()}
+function saveTargets(){S.weeklyTargets={study:+tgStudy.value||0,exercise:+tgExercise.value||0,reading:+tgReading.value||0,language:+tgLanguage.value||0,blog:+tgBlog.value||0};save()}
+
+const statuses=["아이디어","사진 준비","작성 중","수정 중","발행 완료"];
+function blog(){
+ document.getElementById("blog").innerHTML=`<div class="section"><h2>블로그 관리</h2><button class="btn" onclick="addBlog()">+ 글</button></div>
+ <div class="card"><div class="form"><input id="bn" class="input full" placeholder="글 아이디어 / 제목"><input id="bk" class="input" placeholder="키워드"><select id="bc" class="select"><option>맛집</option><option>카페</option><option>공연·전시</option><option>예매·티켓팅</option><option>일상</option><option>기타</option></select><select id="bs" class="select full">${statuses.map(s=>`<option>${s}</option>`).join("")}</select><input id="bp" class="input full" type="date" value="${td()}"></div></div>
+ <div class="card">${S.blogs.slice().reverse().map((x,i)=>`<div class="item"><select class="select status-select" onchange="updateBlogStatus(${S.blogs.length-1-i},this.value)">${statuses.map(s=>`<option ${x.status===s?"selected":""}>${s}</option>`).join("")}</select><span style="flex:1"><b>${esc(x.name)}</b><br><span class="mini">${esc(x.cat)} · ${esc(x.keyword||"")}</span></span><button class="btn danger" onclick="delBlog(${S.blogs.length-1-i})">삭제</button></div>`).join("")||'<div class="empty">관리할 글을 추가해보세요.</div>'}</div>`;
+}
+function addBlog(){if(!bn.value.trim())return alert("아이디어나 제목을 입력해줘.");S.blogs.push({name:bn.value,keyword:bk.value,cat:bc.value,status:bs.value,pub:bp.value});save()}
+function updateBlogStatus(i,v){S.blogs[i].status=v;save()}
+function delBlog(i){S.blogs.splice(i,1);save()}
+
+function render(){today();schedule();study();weekly();habits();blog()}
+document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav").forEach(x=>x.classList.remove("on"));b.classList.add("on");document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));document.getElementById(b.dataset.v).classList.add("active")});
+if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});render();
 </script></body></html>
